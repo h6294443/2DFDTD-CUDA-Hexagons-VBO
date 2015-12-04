@@ -3,7 +3,7 @@
 
 #include <math.h>
 #define PI 3.14159265359
-const int maxTime = 5000;				// number of time steps         
+const int maxTime = 100;				// number of time steps         
 const int M = 4;						// steps in x-direction
 const int N = 4;						// steps in y-direction
 const int TILE_SIZE = 16;				// Tile size, relates closely to size of a block.  

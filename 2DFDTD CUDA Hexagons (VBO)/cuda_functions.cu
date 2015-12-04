@@ -108,7 +108,6 @@ void update_all_fields_hex_CUDA()
 	dim3 BLK(Bx, By, 1);
 	dim3 THD(TILE_SIZE, TILE_SIZE, 1);
 	double factor = Sc / N_lambda;
-//	int size = g->nCells;
 
 	// Launch a kernel on the GPU with one thread for each element.
 	Update_3H_kernel << <BLK, THD >> >(dev_h1, dev_ch1, dev_h2, dev_ch2, dev_h3, dev_ch3, dev_ez, g->im, g->jm);	// may need to reduce the last two arguments to g->im-1 and g->jm-1
@@ -124,6 +123,14 @@ void update_all_fields_hex_CUDA()
 
 	Source_Update_Kernel << <BLK, THD >> >(dev_ez, dev_ez_float, src_pos_x, src_pos_y, 2, g->time, factor, 150, N_lambda, Sc, 0, 1500);
 	g->time += 1;										// Must advance time manually here
+	
+	/*float *ez_check;
+	ez_check = new float[M*N];
+	cudaMemcpy(ez_check, dev_ez_float, M*N * sizeof(float), cudaMemcpyDeviceToHost);
+	for (int k = 0; k < M*N; k++) {
+		if (ez_check[k] != 0)
+			printf("vertex[%i] Ez = %f\n", k, ez_check[k]);
+	}*/
 }
 
 void resetBeforeExit() {

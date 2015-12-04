@@ -1,4 +1,5 @@
 #include "parameters.h"
+#include "global.h"
 #include <GL/glew.h>
 #include <GL/GL.h>
 #include <GL/freeglut.h>
@@ -13,7 +14,7 @@
 #include <string.h>
 #include <math.h>
 #include "grid_2d_geo.h"
-#include "global.h"
+
 #include "cuda_functions.h"
 
 // This file belongs to HEXCUDA V2.00
@@ -27,6 +28,7 @@ void createVBO(mappedBuffer_t* mbuf);
 void deleteVBO(mappedBuffer_t* mbuf);
 void initCuda();
 void renderCuda(int drawMode);
+void renderCuda(int drawMode);
 void Cleanup(int iExitCode);
 bool runFdtdWithFieldDisplay(int argc, char** argv);
 void runIterationsAndDisplay();			// Used as display callback function in the glutMainLoop()
@@ -38,9 +40,11 @@ void createImageOnGpu();
 void create_Grid_points_only(float4 *dDptr, uchar4 *cPtr);
 
 // Function prototypes for stuff in cuda-opengl_functions.cu
-__global__ void create_Grid_points_only_kernel(float4 *dDptr, uchar4 *cptr, int width, int height, float quarter_height, float half_width);
+__global__ void create_Grid_points_only_kernel_2D(float4 *dDptr, uchar4 *cptr, int width, int height, float quarter_height, float half_width);
+__global__ void create_Grid_points_only_kernel_1D(float4 *dDptr, uchar4 *cptr, int width, int height, float quarter_height, float half_width);
 __global__ void find_min_and_max_on_gpu(int nblocks, float* field,
 										float* minimum_field_value,
 										float* maximum_field_value);
-__global__ void create_hex_image_on_gpu(uchar4 *colorPos, int M_color, int N_color, float* Ez, int M, int N, float minval, float maxval);
+__global__ void create_hex_image_on_gpu_kernel_2D(uchar4 *colorPos, int M_color, int N_color, float* Ez, int M, int N, float minval, float maxval);
+__global__ void create_hex_image_on_gpu_kernel_1D(uchar4 *colorPos, int M_color, int N_color, float* Ez, int M, int N, float minval, float maxval);
 

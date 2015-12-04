@@ -1,0 +1,78 @@
+﻿Build started 12/4/2015 2:08:14 PM.
+     1>Project "C:\Users\Engels\documents\visual studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO).vcxproj" on node 2 (Rebuild target(s)).
+     1>CudaClean:
+         cmd.exe /C "C:\Users\Engels\AppData\Local\Temp\tmp12e6657d42dd42a7bf7bfb07d2b76119.cmd"
+         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\nvcc.exe" -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile   -g   -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd " -o x64\Debug\cuda-opengl_functions.cu.obj "C:\Users\Engels\documents\visual studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\cuda-opengl_functions.cu" -clean
+         
+         C:\Users\Engels\documents\visual studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\nvcc.exe" -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile   -g   -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd " -o x64\Debug\cuda-opengl_functions.cu.obj "C:\Users\Engels\documents\visual studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\cuda-opengl_functions.cu" -clean 
+         cuda-opengl_functions.cu
+       CudaClean:
+         cmd.exe /C "C:\Users\Engels\AppData\Local\Temp\tmpddcb74be2102450883826ae06ba5f15f.cmd"
+         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\nvcc.exe" -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile   -g   -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd " -o x64\Debug\cuda_functions.cu.obj "C:\Users\Engels\documents\visual studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\cuda_functions.cu" -clean
+         
+         C:\Users\Engels\documents\visual studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\nvcc.exe" -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile   -g   -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd " -o x64\Debug\cuda_functions.cu.obj "C:\Users\Engels\documents\visual studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\cuda_functions.cu" -clean 
+         cuda_functions.cu
+       AddCudaCompileDeps:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /DWIN64 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" /I. /FIcuda_runtime.h /c "C:\Users\Engels\documents\visual studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\cuda-opengl_functions.cu" 
+       AddCudaCompileDeps:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /DWIN64 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" /I. /FIcuda_runtime.h /c "C:\Users\Engels\documents\visual studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\cuda_functions.cu" 
+       CudaBuild:
+         Compiling CUDA source file cuda-opengl_functions.cu...
+         cmd.exe /C "C:\Users\Engels\AppData\Local\Temp\tmp5c1c304e0b914d61b28925a963ff1254.cmd"
+         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2013 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile -cudart static  -g   -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd " -o x64\Debug\cuda-opengl_functions.cu.obj "C:\Users\Engels\documents\visual studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\cuda-opengl_functions.cu"
+         
+         C:\Users\Engels\documents\visual studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2013 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile -cudart static  -g   -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd " -o x64\Debug\cuda-opengl_functions.cu.obj "C:\Users\Engels\documents\visual studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\cuda-opengl_functions.cu" 
+     1>C:/Users/Engels/documents/visual studio 2013/Projects/2DFDTD CUDA Hexagons (VBO)/2DFDTD CUDA Hexagons (VBO)/cuda-opengl_functions.cu(23): warning : variable "z" was set but never used
+     1>C:/Users/Engels/documents/visual studio 2013/Projects/2DFDTD CUDA Hexagons (VBO)/2DFDTD CUDA Hexagons (VBO)/cuda-opengl_functions.cu(67): warning : variable "z" was set but never used
+     1>C:/Users/Engels/documents/visual studio 2013/Projects/2DFDTD CUDA Hexagons (VBO)/2DFDTD CUDA Hexagons (VBO)/cuda-opengl_functions.cu(305): warning : variable "size2" was declared but never referenced
+     1>C:/Users/Engels/documents/visual studio 2013/Projects/2DFDTD CUDA Hexagons (VBO)/2DFDTD CUDA Hexagons (VBO)/cuda-opengl_functions.cu(313): warning : variable "size1" was declared but never referenced
+     1>C:/Users/Engels/documents/visual studio 2013/Projects/2DFDTD CUDA Hexagons (VBO)/2DFDTD CUDA Hexagons (VBO)/cuda-opengl_functions.cu(23): warning : variable "z" was set but never used
+     1>C:/Users/Engels/documents/visual studio 2013/Projects/2DFDTD CUDA Hexagons (VBO)/2DFDTD CUDA Hexagons (VBO)/cuda-opengl_functions.cu(67): warning : variable "z" was set but never used
+     1>C:/Users/Engels/documents/visual studio 2013/Projects/2DFDTD CUDA Hexagons (VBO)/2DFDTD CUDA Hexagons (VBO)/cuda-opengl_functions.cu(305): warning : variable "size2" was declared but never referenced
+     1>C:/Users/Engels/documents/visual studio 2013/Projects/2DFDTD CUDA Hexagons (VBO)/2DFDTD CUDA Hexagons (VBO)/cuda-opengl_functions.cu(313): warning : variable "size1" was declared but never referenced
+         cuda-opengl_functions.cu
+     1>C:/Users/Engels/documents/visual studio 2013/Projects/2DFDTD CUDA Hexagons (VBO)/2DFDTD CUDA Hexagons (VBO)/cuda-opengl_functions.cu(299): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>C:/Users/Engels/documents/visual studio 2013/Projects/2DFDTD CUDA Hexagons (VBO)/2DFDTD CUDA Hexagons (VBO)/cuda-opengl_functions.cu(300): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+       CudaBuild:
+         Compiling CUDA source file cuda_functions.cu...
+         cmd.exe /C "C:\Users\Engels\AppData\Local\Temp\tmp92018fd9ea054de5b58484a02fe2cce0.cmd"
+         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2013 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile -cudart static  -g   -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd " -o x64\Debug\cuda_functions.cu.obj "C:\Users\Engels\documents\visual studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\cuda_functions.cu"
+         
+         C:\Users\Engels\documents\visual studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2013 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile -cudart static  -g   -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd " -o x64\Debug\cuda_functions.cu.obj "C:\Users\Engels\documents\visual studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\cuda_functions.cu" 
+         cuda_functions.cu
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" /Zi /nologo /W3 /WX- /Od /D WIN32 /D WIN64 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt global.cpp graphics.cpp grid.cpp main.cpp source.cpp
+         source.cpp
+         main.cpp
+         grid.cpp
+         graphics.cpp
+     1>graphics.cpp(74): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>graphics.cpp(75): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>graphics.cpp(78): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>graphics.cpp(79): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>graphics.cpp(82): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+         global.cpp
+         Generating Code...
+     1>c:\users\engels\documents\visual studio 2013\projects\2dfdtd cuda hexagons (vbo)\2dfdtd cuda hexagons (vbo)\graphics.cpp(297): warning C4715: 'runFdtdWithFieldDisplay' : not all control paths return a value
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Engels\documents\visual studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\x64\Debug\2DFDTD CUDA Hexagons (VBO).exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\lib\x64" cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib opengl32.lib freeglut.lib glew32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Engels\documents\visual studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\x64\Debug\2DFDTD CUDA Hexagons (VBO).pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Engels\documents\visual studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\x64\Debug\2DFDTD CUDA Hexagons (VBO).lib" /MACHINE:X64 "x64\Debug\cuda-opengl_functions.cu.obj"
+         x64\Debug\cuda_functions.cu.obj
+         x64\Debug\global.obj
+         x64\Debug\graphics.obj
+         x64\Debug\grid.obj
+         x64\Debug\main.obj
+         x64\Debug\source.obj
+         2DFDTD CUDA Hexagons (VBO).vcxproj -> C:\Users\Engels\documents\visual studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\x64\Debug\2DFDTD CUDA Hexagons (VBO).exe
+       PostBuildEvent:
+         echo copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Engels\documents\visual studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\x64\Debug\"
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Engels\documents\visual studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\x64\Debug\"
+         :VCEnd
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Engels\documents\visual studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\x64\Debug\"
+         C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart32_75.dll
+         C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart64_75.dll
+                 2 file(s) copied.
+     1>Done Building Project "C:\Users\Engels\documents\visual studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO).vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:10.26

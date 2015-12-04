@@ -4,8 +4,6 @@
 #ifndef _MACROS_H
 #define _MACROS_H
 
-
-
 /*	Macros that permit the "Grid" to be specified	*/
 /*	One-Dimensional grid	*/
 #define Hy1G(G, M)		G->hy[M]

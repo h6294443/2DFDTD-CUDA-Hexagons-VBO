@@ -71,13 +71,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Windows Kits\8.1\Lib\winv6.3\um\x64;C:\Users\Engels\Documents\Visual Studio 2013\Projects\glew-1.13.0\lib\Release\x64;C:\Users\Engels\Documents\Visual Studio 2013\Projects\freeglut\lib\x64;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Engels\Documents\Visual Studio 2013\Projects\GL_TOOLS_STUFF;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Windows Kits\8.1\Lib\winv6.3\um\x64;C:\Users\Engels\Documents\Visual Studio 2013\Projects\glew-1.13.0\lib\Release\x64;C:\Users\Engels\Documents\Visual Studio 2013\Projects\freeglut\lib\x64;$(LibraryPath)</LibraryPath>
     <SourcePath>C:\Users\Engels\Documents\Visual Studio 2013\Projects\freeglut\bin\x64;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Windows Kits\8.1\Lib\winv6.3\um\x64;C:\Users\Engels\Documents\Visual Studio 2013\Projects\glew-1.13.0\lib\Release\x64;C:\Users\Engels\Documents\Visual Studio 2013\Projects\freeglut\lib\x64;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Engels\Documents\Visual Studio 2013\Projects\GL_TOOLS_STUFF;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Windows Kits\8.1\Lib\winv6.3\um\x64;C:\Users\Engels\Documents\Visual Studio 2013\Projects\glew-1.13.0\lib\Release\x64;C:\Users\Engels\Documents\Visual Studio 2013\Projects\freeglut\lib\x64;$(LibraryPath)</LibraryPath>
     <SourcePath>C:\Users\Engels\Documents\Visual Studio 2013\Projects\freeglut\bin\x64;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

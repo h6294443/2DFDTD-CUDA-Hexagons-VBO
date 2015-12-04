@@ -1,0 +1,124 @@
+﻿Build started 12/2/2015 4:30:45 PM.
+     1>Project "C:\Users\Engels\Documents\Visual Studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO).vcxproj" on node 2 (Rebuild target(s)).
+     1>CudaClean:
+         cmd.exe /C "C:\Users\Engels\AppData\Local\Temp\tmp7d3b981e64a84585ab3367b25a3bed11.cmd"
+         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\nvcc.exe" -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile   -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd " -o Debug\cuda-opengl_functions.cu.obj "C:\Users\Engels\Documents\Visual Studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\cuda-opengl_functions.cu" -clean
+         
+         C:\Users\Engels\Documents\Visual Studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\nvcc.exe" -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile   -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd " -o Debug\cuda-opengl_functions.cu.obj "C:\Users\Engels\Documents\Visual Studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\cuda-opengl_functions.cu" -clean 
+         cuda-opengl_functions.cu
+       CudaClean:
+         cmd.exe /C "C:\Users\Engels\AppData\Local\Temp\tmp4d2709da317a4b79be7a701e808a2a25.cmd"
+         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\nvcc.exe" -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile   -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd " -o Debug\cuda_functions.cu.obj "C:\Users\Engels\Documents\Visual Studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\cuda_functions.cu" -clean
+         
+         C:\Users\Engels\Documents\Visual Studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\nvcc.exe" -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile   -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd " -o Debug\cuda_functions.cu.obj "C:\Users\Engels\Documents\Visual Studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\cuda_functions.cu" -clean 
+         cuda_functions.cu
+       AddCudaCompileDeps:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" /I. /FIcuda_runtime.h /c "C:\Users\Engels\Documents\Visual Studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\cuda-opengl_functions.cu" 
+       AddCudaCompileDeps:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" /I. /FIcuda_runtime.h /c "C:\Users\Engels\Documents\Visual Studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\cuda_functions.cu" 
+       CudaBuild:
+         Compiling CUDA source file cuda-opengl_functions.cu...
+         cmd.exe /C "C:\Users\Engels\AppData\Local\Temp\tmpd27a5c5551eb4105b22f89e5f3263270.cmd"
+         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2013 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd " -o Debug\cuda-opengl_functions.cu.obj "C:\Users\Engels\Documents\Visual Studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\cuda-opengl_functions.cu"
+         
+         C:\Users\Engels\Documents\Visual Studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2013 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd " -o Debug\cuda-opengl_functions.cu.obj "C:\Users\Engels\Documents\Visual Studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\cuda-opengl_functions.cu" 
+     1>C:/Users/Engels/Documents/Visual Studio 2013/Projects/2DFDTD CUDA Hexagons (VBO)/2DFDTD CUDA Hexagons (VBO)/cuda-opengl_functions.cu(28): warning : variable "z" was set but never used
+     1>C:/Users/Engels/Documents/Visual Studio 2013/Projects/2DFDTD CUDA Hexagons (VBO)/2DFDTD CUDA Hexagons (VBO)/cuda-opengl_functions.cu(224): warning : variable "vertex_check" was set but never used
+     1>C:/Users/Engels/Documents/Visual Studio 2013/Projects/2DFDTD CUDA Hexagons (VBO)/2DFDTD CUDA Hexagons (VBO)/cuda-opengl_functions.cu(28): warning : variable "z" was set but never used
+     1>C:/Users/Engels/Documents/Visual Studio 2013/Projects/2DFDTD CUDA Hexagons (VBO)/2DFDTD CUDA Hexagons (VBO)/cuda-opengl_functions.cu(224): warning : variable "vertex_check" was set but never used
+         cuda-opengl_functions.cu
+     1>C:/Users/Engels/Documents/Visual Studio 2013/Projects/2DFDTD CUDA Hexagons (VBO)/2DFDTD CUDA Hexagons (VBO)/cuda-opengl_functions.cu(222): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>C:/Users/Engels/Documents/Visual Studio 2013/Projects/2DFDTD CUDA Hexagons (VBO)/2DFDTD CUDA Hexagons (VBO)/cuda-opengl_functions.cu(223): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+       CudaBuild:
+         Compiling CUDA source file cuda_functions.cu...
+         cmd.exe /C "C:\Users\Engels\AppData\Local\Temp\tmpbeae692d600b4b718a88b2ec5bf85be9.cmd"
+         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2013 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd " -o Debug\cuda_functions.cu.obj "C:\Users\Engels\Documents\Visual Studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\cuda_functions.cu"
+         
+         C:\Users\Engels\Documents\Visual Studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2013 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd " -o Debug\cuda_functions.cu.obj "C:\Users\Engels\Documents\Visual Studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\cuda_functions.cu" 
+         cuda_functions.cu
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt global.cpp graphics.cpp grid.cpp main.cpp source.cpp
+         source.cpp
+         main.cpp
+         grid.cpp
+         graphics.cpp
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(52): error C2062: type 'int' unexpected
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(52): error C2059: syntax error : ')'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(53): error C2143: syntax error : missing ';' before '{'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(53): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(57): error C2062: type 'int' unexpected
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(57): error C2059: syntax error : ')'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(58): error C2143: syntax error : missing ';' before '{'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(58): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1056): error C2146: syntax error : missing ')' before identifier 'a'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1056): error C2226: syntax error : unexpected type 'int2'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1056): error C2059: syntax error : ')'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1057): error C2143: syntax error : missing ';' before '{'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1057): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1060): error C2146: syntax error : missing ')' before identifier 'a'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1060): error C2226: syntax error : unexpected type 'int3'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1060): error C2059: syntax error : ')'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1061): error C2143: syntax error : missing ';' before '{'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1061): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1064): error C2146: syntax error : missing ')' before identifier 'a'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1064): error C2226: syntax error : unexpected type 'int4'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1064): error C2059: syntax error : ')'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1065): error C2143: syntax error : missing ';' before '{'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1065): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1069): error C2146: syntax error : missing ')' before identifier 'a'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1069): error C2226: syntax error : unexpected type 'uint2'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1069): error C2059: syntax error : ')'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1070): error C2143: syntax error : missing ';' before '{'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1070): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1073): error C2146: syntax error : missing ')' before identifier 'a'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1073): error C2226: syntax error : unexpected type 'uint3'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1073): error C2059: syntax error : ')'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1074): error C2143: syntax error : missing ';' before '{'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1074): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1077): error C2146: syntax error : missing ')' before identifier 'a'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1077): error C2226: syntax error : unexpected type 'uint4'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1077): error C2059: syntax error : ')'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1078): error C2143: syntax error : missing ';' before '{'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1078): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1099): error C2146: syntax error : missing ')' before identifier 'a'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1099): error C2226: syntax error : unexpected type 'int2'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1099): error C2059: syntax error : ')'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1100): error C2143: syntax error : missing ';' before '{'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1100): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1103): error C2146: syntax error : missing ')' before identifier 'a'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1103): error C2226: syntax error : unexpected type 'int3'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1103): error C2059: syntax error : ')'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1104): error C2143: syntax error : missing ';' before '{'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1104): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1107): error C2146: syntax error : missing ')' before identifier 'a'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1107): error C2226: syntax error : unexpected type 'int4'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1107): error C2059: syntax error : ')'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1108): error C2143: syntax error : missing ';' before '{'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1108): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1112): error C2146: syntax error : missing ')' before identifier 'a'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1112): error C2226: syntax error : unexpected type 'uint2'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1112): error C2059: syntax error : ')'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1113): error C2143: syntax error : missing ';' before '{'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1113): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1116): error C2146: syntax error : missing ')' before identifier 'a'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1116): error C2226: syntax error : unexpected type 'uint3'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1116): error C2059: syntax error : ')'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1117): error C2143: syntax error : missing ';' before '{'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1117): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1120): error C2146: syntax error : missing ')' before identifier 'a'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1120): error C2226: syntax error : unexpected type 'uint4'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1120): error C2059: syntax error : ')'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1121): error C2143: syntax error : missing ';' before '{'
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\helper_math.h(1121): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\users\engels\documents\visual studio 2013\projects\2dfdtd cuda hexagons (vbo)\2dfdtd cuda hexagons (vbo)\graphics.cpp(74): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\engels\documents\visual studio 2013\projects\2dfdtd cuda hexagons (vbo)\2dfdtd cuda hexagons (vbo)\graphics.cpp(75): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\engels\documents\visual studio 2013\projects\2dfdtd cuda hexagons (vbo)\2dfdtd cuda hexagons (vbo)\graphics.cpp(78): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\engels\documents\visual studio 2013\projects\2dfdtd cuda hexagons (vbo)\2dfdtd cuda hexagons (vbo)\graphics.cpp(79): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\engels\documents\visual studio 2013\projects\2dfdtd cuda hexagons (vbo)\2dfdtd cuda hexagons (vbo)\graphics.cpp(82): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+         global.cpp
+         Generating Code...
+     1>Done Building Project "C:\Users\Engels\Documents\Visual Studio 2013\Projects\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO)\2DFDTD CUDA Hexagons (VBO).vcxproj" (Rebuild target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:10.40
