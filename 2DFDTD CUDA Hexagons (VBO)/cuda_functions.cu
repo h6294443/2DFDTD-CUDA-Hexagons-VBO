@@ -121,16 +121,16 @@ void update_all_fields_hex_CUDA()
 	checkErrorAfterKernelLaunch();						// Check for any errors launching the kernel
 	deviceSyncAfterKernelLaunch();						// Do a device sync 
 
-	Source_Update_Kernel << <BLK, THD >> >(dev_ez, dev_ez_float, src_pos_x, src_pos_y, 2, g->time, factor, 150, N_lambda, Sc, 0, 1500);
+	Source_Update_Kernel << <BLK, THD >> >(dev_ez, dev_ez_float, src_pos_x, src_pos_y, 2, g->time, factor, 150, N_lambda, Sc, 0, maxTime);
 	g->time += 1;										// Must advance time manually here
 	
-	/*float *ez_check;
+	float *ez_check;
 	ez_check = new float[M*N];
 	cudaMemcpy(ez_check, dev_ez_float, M*N * sizeof(float), cudaMemcpyDeviceToHost);
-	for (int k = 0; k < M*N; k++) {
-		if (ez_check[k] != 0)
+	for (int k = 0; k < 256; k++) {
+		//if (ez_check[k] != 0)
 			printf("vertex[%i] Ez = %f\n", k, ez_check[k]);
-	}*/
+	}
 }
 
 void resetBeforeExit() {
