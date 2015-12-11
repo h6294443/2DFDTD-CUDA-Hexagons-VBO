@@ -121,16 +121,18 @@ void update_all_fields_hex_CUDA()
 	checkErrorAfterKernelLaunch();						// Check for any errors launching the kernel
 	deviceSyncAfterKernelLaunch();						// Do a device sync 
 
-	Source_Update_Kernel << <BLK, THD >> >(dev_ez, dev_ez_float, src_pos_x, src_pos_y, 2, g->time, factor, 150, N_lambda, Sc, 0, maxTime);
+	Source_Update_Kernel << <BLK, THD >> >(dev_ez, dev_ez_float, src_pos_x, src_pos_y, 1, g->time, factor, 150, N_lambda, Sc, 0, maxTime);
 	g->time += 1;										// Must advance time manually here
 	
-	float *ez_check;
+	/*float *ez_check;
+	double *ez_check_double;
 	ez_check = new float[M*N];
+	ez_check_double = new double[M*N];
 	cudaMemcpy(ez_check, dev_ez_float, M*N * sizeof(float), cudaMemcpyDeviceToHost);
-	for (int k = 0; k < 256; k++) {
+	cudaMemcpy(ez_check_double, dev_ez, M*N * sizeof(double), cudaMemcpyDeviceToHost);
+	for (int k = 0; k < 256; k++) 
 		//if (ez_check[k] != 0)
-			printf("vertex[%i] Ez = %f\n", k, ez_check[k]);
-	}
+			printf("vertex[%i] Ez = %f\n", k, ez_check_double[k]);*/
 }
 
 void resetBeforeExit() {
@@ -139,10 +141,8 @@ void resetBeforeExit() {
 	// cudaDeviceReset must be called before exiting in order for profiling and
 	// tracing tools such as Nsight and Visual Profiler to show complete traces.
 	cudaStatus = cudaDeviceReset();
-	if (cudaStatus != cudaSuccess) {
+	if (cudaStatus != cudaSuccess) 
 		fprintf(stderr, "cudaDeviceReset failed!");
-		//return 1;
-	}
 	
 }
 
@@ -150,18 +150,16 @@ void pickGPU(int gpuid) {
 
 	cudaError_t cudaStatus;
 	cudaStatus = cudaSetDevice(gpuid);
-	if (cudaStatus != cudaSuccess) {
+	if (cudaStatus != cudaSuccess) 
 		fprintf(stderr, "cudaSetDevice failed!  Do you have a CUDA-capable GPU installed?");
-	}
 }
 
 void checkErrorAfterKernelLaunch() {
 	
 	cudaError_t cudaStatus;
 	cudaStatus = cudaGetLastError();
-	if (cudaStatus != cudaSuccess) {
+	if (cudaStatus != cudaSuccess) 
 		fprintf(stderr, "Kernel launch failed: %s\n", cudaGetErrorString(cudaStatus));
-	}
 }
 
 void deviceSyncAfterKernelLaunch() {
@@ -170,9 +168,8 @@ void deviceSyncAfterKernelLaunch() {
 	// any errors encountered during the launch.
 	cudaError_t cudaStatus;
 	cudaStatus = cudaDeviceSynchronize();
-	if (cudaStatus != cudaSuccess) {
+	if (cudaStatus != cudaSuccess) 
 		fprintf(stderr, "cudaDeviceSynchronize returned error code %d after launching kernel.\n", cudaStatus);
-	}
 }
 
 void initializeHexGlobalDevicePointers() {

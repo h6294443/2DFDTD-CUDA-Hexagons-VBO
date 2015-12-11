@@ -170,13 +170,13 @@ __global__ void create_hex_image_on_gpu_kernel_1D(uchar4 *colorPos, int M_color,
 			F = (Ez[offset_ez] - minval) /			// Calculate color scalar from Ez
 				(maxval - minval);
 			colorPos[offset].x = 255.f *0.5*(F);	// Next 3 lines set the 3 color components
-			colorPos[offset].y = 255.f *0.5*(F);	// with the color scalar
-			colorPos[offset].z = 255.f *0.5*(F);
+			colorPos[offset].y = 0.f *0.5*(F);	// with the color scalar
+			colorPos[offset].z = 0.f *0.5*(F);
 		}
 		else {
-			colorPos[offset].x = 0.f;				// Set vertex to white if it is not an 
-			colorPos[offset].y = 0.f;				// Ez point
-			colorPos[offset].z = 0.f;
+			colorPos[offset].x = 255.f;				// Set vertex to white if it is not an 
+			colorPos[offset].y = 255.f;				// Ez point
+			colorPos[offset].z = 255.f;
 		}
 		colorPos[offset].w = 0;						// Not really sure what the w component does
 	}
@@ -278,15 +278,14 @@ void createImageOnGpu()	// argument g_odata is the float Ez field
 	//minval = -1.0;	maxval = 1.0;	global_min_field = -1.0; global_max_field = 1.0;
 	//the following kernel now takes a uchar4 array, not uint
 	//create_hex_image_on_gpu_kernel_2D << < BLK2,THD2 >> >(cptr, M_dptr, N_dptr, dvF, M, N, global_min_field, global_max_field);
-	create_hex_image_on_gpu_kernel_1D << < BLK2, THD2 >> >(cptr, M_dptr, N_dptr, dvF, M, N, global_min_field, global_max_field);
+	create_hex_image_on_gpu_kernel_1D << < BLK1, THD1 >> >(cptr, M_dptr, N_dptr, dvF, M, N, global_min_field, global_max_field);
 
 	/*uchar4 *color_check;
 	color_check = new uchar4[size1];
 	cudaMemcpy(color_check, cptr, size1 * sizeof(uchar4), cudaMemcpyDeviceToHost);
-	for (int k = 0; k < size1; k++) {
+	for (int k = 0; k < size1; k++) 
 		//if (color_check[k].x != 0 && color_check[k].y != 0)
-			printf("vertex[%i] w = %i and x = %i and y = %i and z = %i\n", k, color_check[k].w, color_check[k].x, color_check[k].y, color_check[k].z);
-	}*/
+			printf("vertex[%i] w = %i and x = %i and y = %i and z = %i\n", k, color_check[k].w, color_check[k].x, color_check[k].y, color_check[k].z);*/
 }
 
 void create_Grid_points_only(float4* dDptr, uchar4 *cPtr)

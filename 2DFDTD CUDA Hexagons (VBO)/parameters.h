@@ -3,10 +3,10 @@
 
 #include <math.h>
 #define PI 3.14159265359
-const int maxTime = 100;				// number of time steps         
-const int M = 16;						// steps in x-direction
-const int N = 16;						// steps in y-direction
-const int TILE_SIZE = 16;				// Tile size, relates closely to size of a block.  
+const int maxTime = 1000;				// number of time steps         
+const int M = 1024;						// steps in x-direction
+const int N = 1024;						// steps in y-direction
+const int TILE_SIZE = 32;				// Tile size, relates closely to size of a block.  
 const double e0 = 8.85418782e-12;		// electric permittivity of free space
 const double u0 = 4 * PI *1e-7;			// magnetic permeability of free space
 const double imp0 = sqrt(u0 / e0);		// impedance of free space

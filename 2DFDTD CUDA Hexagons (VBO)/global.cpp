@@ -25,10 +25,10 @@ uint *iptr;						// Not sure what this is yet.
 const double c = 299792458.0;
 
 
-double src_f = 11e3;                 // Frequency of the source (for a sine or cosine)
+double src_f = 11e4;                 // Frequency of the source (for a sine or cosine)
 const double lambda = c / src_f;           // Wavelength of the source (for a sine or cosine)
 const double dx = 40000;
-const double Sc = 1 / sqrt(30.0);
+const double Sc = 0.6;
 const double dt = Sc*dx/c;
 const double N_lambda = lambda / dx;
 const double hex_t = dx;
