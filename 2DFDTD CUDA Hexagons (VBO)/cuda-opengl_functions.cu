@@ -17,12 +17,9 @@ __global__ void create_Grid_points_only_kernel_1D(float4 *dDptr, uchar4 *cPtr, i
 	int offset = blockIdx.x * blockDim.x + threadIdx.x;	// Calculate linear offset for 1-D case
 	int j = offset / width;							// Creates a virtual row index for the 1-D case, needed for odd/even row check
 	int i = offset % width;						// Keeping both offset and i for clarity
-
-	int max_size = width*height;					// Size of the vertex array (actual points)
-
-	float u, v, w, z;								// The four components of uv space
-	w = 0.0f; z = 0.0f;
-	
+    int max_size = width*height;					// Size of the vertex array (actual points)
+    float u, v;								// The four components of uv space
+		
 	v = -1.0f + j * dev_quarter_height;				// The Y-component in uv space
 	if (j == 0)										// Are we in row 0?
 		u = -1.0f + dev_half_width + i*dev_width;	// Then we start indented (w/2) 
@@ -34,17 +31,10 @@ __global__ void create_Grid_points_only_kernel_1D(float4 *dDptr, uchar4 *cPtr, i
 		u = -1.0 + i*dev_width;						// Then start flush (no w/2 offset)
 	
 	// write output vertex
-	if (offset < max_size) {
-		dDptr[offset] = make_float4(u, v, w, 1.0f);
-		//cPtr[offset].x = 255.f;						// Next 3 lines set the 3 color components
-		//cPtr[offset].y = 0.f;						// with the color scalar
-		//cPtr[offset].z = 255.f;
-	} else {
-		dDptr[offset] = make_float4(0.0f, 0.0f, 0.0f, 0.0f);
-		//cPtr[offset].x = 0.f;						// Next 3 lines set the 3 color components
-		//cPtr[offset].y = 0.f;						// with the color scalar
-		//cPtr[offset].z = 0.f; 
-	}
+	if (offset < max_size)
+		dDptr[offset] = make_float4(u, v, 0.0f, 1.0f); 
+    else 
+		dDptr[offset] = make_float4(0.0f, 0.0f, 0.0f, 0.0f);		
 }
 
 __global__ void create_Grid_points_only_kernel_2D(float4 *dDptr, uchar4 *cPtr, int width, int height, float quarter_height, float half_width) {
@@ -136,15 +126,9 @@ __global__ void find_min_and_max_on_gpu(int nblocks, float* field,
 	}
 }
 
-//void createColormapOnGpu()
-//{
-//	cudaError_t et;
-//	et = cudaMemcpyToSymbol(dvrgb, rgb, 256 * sizeof(int), 0, cudaMemcpyHostToDevice);
-//}
 
 __global__ void create_hex_image_on_gpu_kernel_1D(uchar4 *colorPos, int M_color, int N_color, float* Ez, int M, int N, float minval, float maxval)
 {
-	/* The following two lines are for the 1-D case */
 	int offset = blockIdx.x * blockDim.x + threadIdx.x;	// Calculate linear offset for 1-D case
 	int j = offset / M_color;							// Creates a virtual row index for the 1-D case, needed for odd/even row check
 	int i = offset % N_color;						// Keeping both offset and i for clarity
@@ -152,39 +136,35 @@ __global__ void create_hex_image_on_gpu_kernel_1D(uchar4 *colorPos, int M_color,
 	
 	float F;										// Color scalar
 
-	/*int cind;
-	float temp;
-	temp = minval;
-	int ti = (j + 1)*M + i;
-	if (j == M - 1) ti = (j)*M + i;
-	F = Ez[ti] - minval;
-	cind = floor(255 * F / (maxval - minval));
-	if (cind > 255) cind = 255;
-	g_odata[ci] = dvrgb[cind];*/
-
-	//if (offset < (M_color*N_color)){				// Make sure we are in range
 	if (offset < max_size) {				// Check row and column index are in range
 		if ((j + 1) % 3 == 0) {						// Are we in an Ez row? (Every 3rd row)
 			int j_ez = j / 3;						// Calculate j offset for Ez 
 			int offset_ez = j_ez*M + i;				// Calculate offset for Ez
 			F = (Ez[offset_ez] - minval) /			// Calculate color scalar from Ez
 				(maxval - minval);
-			colorPos[offset].x = 255.f *0.5*(F);	// Next 3 lines set the 3 color components
-			colorPos[offset].y = 0.f *0.5*(F);	// with the color scalar
-			colorPos[offset].z = 0.f *0.5*(F);
+			colorPos[offset].x = 255.f * 0.7 * (F);	// Next 3 lines set the 3 color components
+			colorPos[offset].y = 255.f * 0.3 * (F);	// with the color scalar
+			colorPos[offset].z = 255.f * 0.5 * (F);
+
+            // troubleshooting only below
+			/*if (Ez[offset_ez] == -1.0101) {
+				colorPos[offset].x = 0.f;
+				colorPos[offset].y = 200;	
+				colorPos[offset].z = 0.f;
+			}*/
 		}
 		else {
 			colorPos[offset].x = 255.f;				// Set vertex to white if it is not an 
 			colorPos[offset].y = 255.f;				// Ez point
 			colorPos[offset].z = 255.f;
 		}
-		colorPos[offset].w = 0;						// Not really sure what the w component does
+		colorPos[offset].w = 0.f;						// Not really sure what the w component does
 	}
 	else {								// If outside the col or row index, set everything to zero
 		colorPos[offset].w = 0.f;
 		colorPos[offset].x = 0.f;
-		colorPos[offset].y = 0.f;
-		colorPos[offset].z = 0.f;
+		colorPos[offset].y = 90.f;
+		colorPos[offset].z = 200.f;
 	}
 	__syncthreads();
 }
