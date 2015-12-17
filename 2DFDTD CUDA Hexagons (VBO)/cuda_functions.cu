@@ -47,13 +47,18 @@ __global__ void Update_Ez_kernel(double *dEz, float *dEz_float, double *dH1, dou
 	if (ezoffset < size_Ez) {
 		if (row == N - 1){
 			dEz[ezoffset] = 0.0;
-			dEz_float[offset] = 0.0;
+			dEz_float[ezoffset] = 0.0;
 		}
 		else{
-			dEz[ezoffset] = dEz[ezoffset] + dCez[ezoffset] * (hex_t * (dH1[offset] + dH2[offset] + dH3[offset] -
-				dH1[offset_t1] - dH2[ezoffset] - dH3[offset_t2]));
-			dEz_float[offset] = __double2float_rd(dEz[offset]);
+			dEz[ezoffset] = 0.0;// dEz[ezoffset] + dCez[ezoffset] * (hex_t * (dH1[offset] + dH2[offset] + dH3[offset] -
+				//dH1[offset_t1] - dH2[ezoffset] - dH3[offset_t2]));
+			dEz_float[ezoffset] = __double2float_rd(dEz[ezoffset]);
 		}
+	}
+
+	if (col == 7 && row == 3) {
+		dEz[ezoffset] = dEz[ezoffset] + cos(2 * PI*time/25);
+		dEz_float[ezoffset] = __double2float_rd(dEz[ezoffset]);
 	}
 	/*if (row == src_pos_y && col == src_pos_x)
 	{
@@ -121,18 +126,18 @@ void update_all_fields_hex_CUDA()
 	checkErrorAfterKernelLaunch();						// Check for any errors launching the kernel
 	deviceSyncAfterKernelLaunch();						// Do a device sync 
 
-	Source_Update_Kernel << <BLK, THD >> >(dev_ez, dev_ez_float, src_pos_x, src_pos_y, 1, g->time, factor, 150, N_lambda, Sc, 0, maxTime);
+	//Source_Update_Kernel << <BLK, THD >> >(dev_ez, dev_ez_float, src_pos_x, src_pos_y, 1, g->time, factor, 150, N_lambda, Sc, 0, maxTime);
 	g->time += 1;										// Must advance time manually here
 	
-	/*float *ez_check;
+	float *ez_check;
 	double *ez_check_double;
 	ez_check = new float[M*N];
 	ez_check_double = new double[M*N];
 	cudaMemcpy(ez_check, dev_ez_float, M*N * sizeof(float), cudaMemcpyDeviceToHost);
 	cudaMemcpy(ez_check_double, dev_ez, M*N * sizeof(double), cudaMemcpyDeviceToHost);
-	for (int k = 0; k < 256; k++) 
+	for (int k = 0; k < M*N; k++) 
 		//if (ez_check[k] != 0)
-			printf("vertex[%i] Ez = %f\n", k, ez_check_double[k]);*/
+			printf("vertex[%i] Ez = %f\n", k, ez_check_double[k]);
 }
 
 void resetBeforeExit() {

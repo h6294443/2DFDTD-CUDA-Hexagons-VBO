@@ -1,4 +1,4 @@
-#include "graphics.h"
+  #include "graphics.h"
 #include <math.h>
 
 //texture<float4, 2, cudaReadModeElementType> inTex;	// Used for PBO
@@ -162,9 +162,9 @@ __global__ void create_hex_image_on_gpu_kernel_1D(uchar4 *colorPos, int M_color,
 	}
 	else {								// If outside the col or row index, set everything to zero
 		colorPos[offset].w = 0.f;
-		colorPos[offset].x = 0.f;
+		colorPos[offset].x = 50.f;
 		colorPos[offset].y = 90.f;
-		colorPos[offset].z = 200.f;
+		colorPos[offset].z = 160.f;
 	}
 	__syncthreads();
 }

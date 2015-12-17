@@ -128,7 +128,7 @@ void deleteVBO(mappedBuffer_t* mbuf)
 }
 void initCuda()
 {
-	pickGPU(1);
+	pickGPU(0);
 	createVBO(&vertexVBO);
 	createVBO(&colorVBO);		
 }
