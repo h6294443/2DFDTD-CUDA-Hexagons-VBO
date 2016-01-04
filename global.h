@@ -13,6 +13,7 @@
 
 #include "grid_2d_geo.h"
 #include <GL/glew.h>
+#define PI 3.14159265359
 
 typedef struct {						// This structure contains vbo data
 	GLuint vbo;
@@ -23,8 +24,6 @@ typedef struct {						// This structure contains vbo data
 	void* space;
 #endif
 } mappedBuffer_t;
-
-//__constant__ unsigned int  dvrgb[256];
 
 // vbo variables
 extern mappedBuffer_t vertexVBO;
@@ -47,13 +46,13 @@ extern double *dev_cez;					// Same
 extern float *dev_ez_float;				// Copy of dev_ez but in single precision
 
 // Hexagonal stuff
-extern const double dx;
-extern const double dt;
-extern const double Sc;
+//extern const double dx;
+//extern const double dt;
+//extern double Sc;
 extern const double c;
 extern const double hex_maximum_distance;
-extern const double lambda;
-extern const double N_lambda;
+//extern const double lambda;
+//extern const double N_lambda;
 extern int iGLUTWindowHandle;          // handle to the GLUT window
 
 extern float *dvminimum_field_value;	// Both of these are passed to the find-min-max-gpu functions
@@ -61,28 +60,21 @@ extern float *dvmaximum_field_value;	// to get proper min/max field values for c
 extern float global_min_field;			// calculated by find_min_max_on_gpu
 extern float global_max_field;			// calculated by find_min_max_on_gpu
 
-extern uint MAX_FPS;
+//extern uint MAX_FPS;
 
-/*
-// Note for all the externs declared below:  they have no location in memory until defined somewhere else (or here).  
-// Extern <variable type> just declares the variable globally to the program, but it does not exist until
-// it has been defined.
+// stuff that used to be in parameters.h
+const int maxTime = 600;				// number of time steps         
+//extern int M;							// steps in x-direction
+//extern int N;							// steps in y-direction
+//extern double X;							// domain width x in meters 
+//extern double Y;							// domain height y in meters
+extern const int TILE_SIZE;				// Tile size, relates closely to size of a block.  
+extern const double e0;					// electric permittivity of free space
+extern const double u0;					// magnetic permeability of free space
+extern const double imp0;				// impedance of free space
+extern const int slowdown;
+extern const int src_pos_x;
+extern const int src_pos_y;
+//extern double src_f;
 
-//extern float dy;						// differential y-operator
-extern float domain_min_x;				// ?
-extern float domain_min_y;				// ?
-extern float domain_max_x;				// ?
-extern float domain_max_y;				// ?
-
-//extern unsigned int rgb[];				// used in createImageOnGpu() in graphics.cpp
-extern float* field_data;				// presumably the argument to createImageOnGpu() or something
-//extern unsigned int* dvimage_data;
-
-//extern bool show_Ez;					// Used as a flag in visualization
-extern int plotting_step;					// Used in IterationAndDisplay; every plotting_step steps arrays will 
-// be displayed via OpenGL
-extern GLuint pbo_destination;
-//extern struct cudaGraphicsResource *cuda_pbo_destination_resource;
-//extern GLuint cuda_result_texture;
-*/
 #endif

@@ -3,9 +3,6 @@
 /*	This source file belongs to project "Ch8_8.4 (TMz Example)"	*/
 #include "global.h"
 #include "source.h"
-#include "parameters.h"
-//#include "grid-2d.h"
-
 #define _USE_MATH_DEFINES
 #include <math.h>
 

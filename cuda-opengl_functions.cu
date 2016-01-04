@@ -4,8 +4,7 @@
 //texture<float4, 2, cudaReadModeElementType> inTex;	// Used for PBO
 
 __global__ void create_Grid_points_only_kernel_1D(float4 *dDptr, uchar4 *cPtr, int width, int height, float quarter_height, float half_width) {
-	// This kernel is nearly identical to the 2D kernel. The 1D kernel unrolls the vertex field
-	// into a one-dimensional array.
+	
 	__shared__ float dev_quarter_height;
 	__shared__ float dev_half_width;				// Shared for access speed
 	__shared__ float dev_width;
@@ -13,12 +12,11 @@ __global__ void create_Grid_points_only_kernel_1D(float4 *dDptr, uchar4 *cPtr, i
 	dev_half_width = half_width;					// The width of the hexagon
 	dev_width = 2 * half_width;
 	
-	/* The following two lines are for the 1-D case */
-	int offset = blockIdx.x * blockDim.x + threadIdx.x;	// Calculate linear offset for 1-D case
+	int offset = blockIdx.x * blockDim.x + threadIdx.x;	// Calculate linear offset for 1-D unrolled array
 	int j = offset / width;							// Creates a virtual row index for the 1-D case, needed for odd/even row check
-	int i = offset % width;						// Keeping both offset and i for clarity
+	int i = offset % width;							// Keeping both offset and i for clarity
     int max_size = width*height;					// Size of the vertex array (actual points)
-    float u, v;								// The four components of uv space
+    float u, v;										// The four components of uv space
 		
 	v = -1.0f + j * dev_quarter_height;				// The Y-component in uv space
 	if (j == 0)										// Are we in row 0?
@@ -122,96 +120,55 @@ __global__ void create_hex_image_on_gpu_kernel_1D(uchar4 *colorPos, int M_color,
 
 void createImageOnGpu()	// argument g_odata is the float Ez field 
 {									// array, coming in as a device pointer
-	int M_dptr = M + 1;				// Number of horizontal vertices for hexagonal grid
-	int N_dptr = 3 * N + 2;			// Number of vertical vertices for hexagonal grid
+	int M_dptr = g->im + 1;				// Number of horizontal vertices for hexagonal grid
+	int N_dptr = 3 * g->jm + 2;			// Number of vertical vertices for hexagonal grid
 	int TILE_SQUARED = TILE_SIZE * TILE_SIZE;				// Just the TILE_SIZE squared for a 1-D kernel
-	int Bx2 = (M_dptr + (TILE_SIZE - 1)) / TILE_SIZE;		// Calculate CUDA grid dimensions.  
-	int By2 = (N_dptr + (TILE_SIZE - 1)) / TILE_SIZE;		// Block dimension fixed at 32x32 threads
-	dim3 BLK2(Bx2, By2, 1);									// Block dimension for 2D kernel
-	dim3 THD2(TILE_SIZE, TILE_SIZE, 1);						// Thread dimensions for 2D kernel
-
-	/* The following four lines are for the 1-D case */
 	int Bx1 = (TILE_SQUARED - 1 + M_dptr*N_dptr) / TILE_SQUARED;
 	dim3 BLK1(Bx1, 1, 1);									// Grid-block dimension for the 1-D case
 	dim3 THD1(TILE_SQUARED, 1, 1);							// Thread-block dimension for the 1-D case
-	int size1 = TILE_SQUARED * Bx1;							// Total array size for the 1-D case
-	
 	dim3 gridm = dim3(1, 1, 1);
 	dim3 blockm = dim3(TILE_SQUARED, 1, 1);
 	int  nblocks = gridm.x * gridm.y;
-	float minval, maxval;
-	float *dvF;
-		
+	float minval, maxval, *dvF;
+			
 	//if (show_Ez) dvF = dev_ez_float; else dvF = dev_hx_float;
 	dvF = dev_ez_float;
-
 	find_min_and_max_on_gpu << < gridm, blockm >> >(nblocks, dvF, dvminimum_field_value, dvmaximum_field_value);
-
 	cudaMemcpy(&minval, dvminimum_field_value, sizeof(float), cudaMemcpyDeviceToHost);
 	cudaMemcpy(&maxval, dvmaximum_field_value, sizeof(float), cudaMemcpyDeviceToHost);
-
-	// Begin troubleshooting code //
-	//printf("Loop %i\n", g->time);
-	//printf("minval = %g\n", minval);
-	//printf("maxval = %g\n\n", maxval);
-	// End troubleshooting code // 
-
 
 	if (minval > 0.0) minval = 0.0;
 	if (maxval < 0.0) maxval = 0.0;
 	if (abs(minval) > maxval) maxval = -minval; else minval = -maxval;
 	if (minval < global_min_field) global_min_field = minval;
 	if (maxval > global_max_field) global_max_field = maxval;
-
-    // Begin troubleshooting code //
-	//printf("Loop %i\n", g->time);
-	//printf("global_min_field = %f\n", global_min_field);
-	//printf("global_max_field = %f\n\n", global_max_field);
-    // End troubleshooting code // 
-
-	//cudaMemcpy(g->ez_float, dvF, g->nCells*sizeof(float), cudaMemcpyDeviceToHost);
-	//for (int i = 0; i < g->nCells; i++)
-	//	if (g->ez_float[i] > 0.001f || g->ez_float[i] < -0.001f)
-	//		printf("ez_float[%i] = %f\n", i, g->ez_float[i]);
-
-	minval = -1.0;	maxval = 1.0;	global_min_field = -1.0; global_max_field = 1.0;
+	    
+	minval = -1.0;	maxval = 1.0;	global_min_field = -0.2; global_max_field = 0.2;
 	//the following kernel now takes a uchar4 array, not uint
-	create_hex_image_on_gpu_kernel_1D << < BLK1, THD1 >> >(cptr, M_dptr, N_dptr, dvF, M, N, global_min_field, global_max_field);
-
-	/*uchar4 *color_check;
-	color_check = new uchar4[size1];
-	cudaMemcpy(color_check, cptr, size1 * sizeof(uchar4), cudaMemcpyDeviceToHost);
-	for (int k = 0; k < size1; k++) 
-		//if (color_check[k].x != 0 && color_check[k].y != 0)
-			printf("vertex[%i] w = %i and x = %i and y = %i and z = %i\n", k, color_check[k].w, color_check[k].x, color_check[k].y, color_check[k].z);*/
+	create_hex_image_on_gpu_kernel_1D << < BLK1, THD1 >> >(cptr, M_dptr, N_dptr, dvF, g->im, g->jm, global_min_field, global_max_field);
 }
 
 void create_Grid_points_only(float4* dDptr, uchar4 *cPtr)
 {
 	// This function and kernel get called only once to create the spatial portion
 	// of the vertex buffer object.  The colors will be updated seperately each loop.
-	int M_dptr = M + 1;										// Number of horizontal vertices for hexagonal grid
-	int N_dptr = 3 * N + 2;									// Number of vertical vertices for hexagonal grid
+	int M_dptr = g->im + 1;										// Number of horizontal vertices for hexagonal grid
+	int N_dptr = 3 * g->jm + 2;									// Number of vertical vertices for hexagonal grid
 	int TILE_SQUARED = TILE_SIZE * TILE_SIZE;				// Just the TILE_SIZE squared for a 1-D kernel
-	float h4 = (2.0 / ((float)N - 0.75))/4;					// The height of the hexagon
-	float wi2 = (2.0 / ((float)M + 0.50))/2;				// The width of the hexagon
-	
-	/* The following seven lines are for the 2-D kernel */
-	int Bx2 = (M_dptr + (TILE_SIZE - 1)) / TILE_SIZE;		// Calculate CUDA grid dimensions.  
-	int By2 = (N_dptr + (TILE_SIZE - 1)) / TILE_SIZE;		// Block dimension fixed at 32x32 threads
-	int size2 = Bx2 * TILE_SIZE * By2 * TILE_SIZE;			// Total array size
-	dim3 BLK2(Bx2, By2, 1);
-	dim3 THD2(TILE_SIZE, TILE_SIZE, 1);
+	int screendim = g->im;
+	if (g->jm > g->im) screendim = g->jm;
+
+	float h4 = (2.0 / ((float)screendim - 0.75))/4;					// The height of the hexagon
+	float wi2 = (2.0 / ((float)screendim + 0.50))/2;				// The width of the hexagon
 	
 	/* The following four lines are for the 1-D case */
 	int Bx1 = (TILE_SQUARED - 1 + M_dptr*N_dptr) / TILE_SQUARED;
 	dim3 BLK1(Bx1, 1, 1);									// Grid-block dimension for the 1-D case
 	dim3 THD1(TILE_SQUARED, 1, 1);							// Thread-block dimension for the 1-D case
-	int size1 = TILE_SQUARED * Bx1;							// Total array size for the 1-D case
-		
-	//create_Grid_points_only_kernel_2D << < BLK2, THD2 >> >(dDptr, cPtr, M_dptr, N_dptr, h4, wi2);		
+			
 	create_Grid_points_only_kernel_1D << < BLK1, THD1 >> >(dDptr, cPtr, M_dptr, N_dptr, h4, wi2);
-
+	
+	//int size1 = TILE_SQUARED * Bx1;							// Total array size for the 1-D case
 	/* The following four lines are for trouble-shooting purposes */
 	/*float4 *vertex_check;
 	vertex_check = new float4[size1];

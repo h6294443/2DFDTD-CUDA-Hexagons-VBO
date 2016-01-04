@@ -1,4 +1,4 @@
-#include "parameters.h"
+//#include "parameters.h"
 #include "global.h"
 #include <GL/glew.h>
 #include <GL/GL.h>

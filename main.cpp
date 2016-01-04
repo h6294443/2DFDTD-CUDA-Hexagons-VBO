@@ -22,7 +22,6 @@
 
 #include "global.h"
 #include <Windows.h>
-#include "parameters.h"
 #include "cuda_functions.h"
 #include "graphics.h"
 #include <time.h>
@@ -30,7 +29,7 @@
 
 int main(int argc, char** argv)
 {
-	printf("Src_pos_x = %i and Src_pos_y = %i\n", src_pos_x, src_pos_y);
+	
 	gridInit(g);							// Initialize the grid
 	initializeHexGlobalDevicePointers();	// Initialize all global dev pointers to zero
 	runFdtdWithFieldDisplay(argc, argv);	// Main function that has the call to glutMainLoop()

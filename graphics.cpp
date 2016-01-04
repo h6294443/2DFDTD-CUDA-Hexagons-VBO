@@ -2,8 +2,8 @@
 //HEXCUDA V2.00
 unsigned int window_width = 1080;
 unsigned int window_height = 1080;
-unsigned int image_width = M;// +1;
-unsigned int image_height = N;// 3 * N + 2;
+unsigned int image_width = g->im;// +1;
+unsigned int image_height = g->jm;// 3 * N + 2;
 int drawMode = GL_TRIANGLE_FAN;
 int iGLUTWindowHandle = 0;          // handle to the GLUT window
 size_t number_of_bytes;
@@ -29,13 +29,13 @@ bool pause_flag = true;	// used for halting field updates (freeze)
 
 void setImageAndWindowSize()
 {
-	image_width = M;
-	image_height = N;
+	image_width = g->im;
+	image_height = g->jm;
 
-	if (M>N)
-		window_height = window_width*N / M;
+	if (g->im > g->jm)
+		window_height = window_width*g->jm / g->im;
 	else
-		window_width = window_height*M / N;
+		window_width = window_height*g->im / g->jm;
 }
 void idle()
 {
@@ -103,7 +103,7 @@ void createVBO(mappedBuffer_t* mbuf)	//void createVBO(GLuint* vbo, unsigned int 
 	glBindBuffer(GL_ARRAY_BUFFER, mbuf->vbo);
 
 	// initialize buffer object
-	unsigned int size = (M+1) * (3*N + 2) * mbuf->typeSize;		// size is (M+1)(3N+2) for full, 
+	unsigned int size = (g->im+1) * (3*g->jm + 2) * mbuf->typeSize;		// size is (M+1)(3N+2) for full, 
 	glBufferData(GL_ARRAY_BUFFER, size, 0, GL_DYNAMIC_DRAW);	// padded hex grid
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
@@ -148,8 +148,8 @@ void renderCuda_1D(int drawMode)	// 1D version for 1D grid point kernel
 	glColorPointer(4, GL_UNSIGNED_BYTE, 0, 0);
 	glEnableClientState(GL_COLOR_ARRAY);
 	
-	int M_hex = M + 1;
-	int N_hex = 3 * N + 2;
+	int M_hex = g->im + 1;
+	int N_hex = 3 * g->jm + 2;
 	int TILE_SQUARED = TILE_SIZE * TILE_SIZE;				// Just the TILE_SIZE squared for a 1-D kernel
 	int Bx1 = (TILE_SQUARED - 1 + M_hex*N_hex) / TILE_SQUARED;
 	int size_padded = TILE_SQUARED * Bx1;							// Total array size for the 1-D case
@@ -157,12 +157,12 @@ void renderCuda_1D(int drawMode)	// 1D version for 1D grid point kernel
 
 	switch (drawMode) {
 	case GL_LINE_STRIP:
-		for (int i = 0; i < ((M + 1)*(3 * N + 2)); i += M)
+		for (int i = 0; i < ((g->im + 1)*(3 * g->jm + 2)); i += g->im)
 			glDrawArrays(GL_LINE_STRIP, i, size_true);// ((M + 1)*(3 * N + 2)));
 		break;
 	case GL_TRIANGLE_FAN: {
 		static GLuint* qIndices = NULL;
-		int size = 9 * M * N;							// M * N Ez points.  Then 9 points per Ez point
+		int size = 9 * g->nCells;							// M * N Ez points.  Then 9 points per Ez point
 														// 9 pts = 1 center, 6 periphery, 1 repeat, 1 restart
 		if (qIndices == NULL) {							// allocate and assign trianglefan indicies 
 			qIndices = (GLuint *)malloc(size*sizeof(GLuint));
@@ -175,7 +175,7 @@ void renderCuda_1D(int drawMode)	// 1D version for 1D grid point kernel
 				mod = (j + 1) / 3;					// Calculate the integer division result
 				k = 1 - mod % 2;					// Calculate the modulus (remainder) - even/odd row of j in multiples of 3
 
-				for (int i = 0; i < M; i++) {		// Steps through the columns in the Ez rows
+				for (int i = 0; i < g->im; i++) {		// Steps through the columns in the Ez rows
 					qIndices[index++] = j*M_hex + i + k;			// Center of hexagon, this is Ez(i,j)
 					qIndices[index++] = (j + 1)*M_hex + (i + 1);	// Point #2
 					qIndices[index++] = (j + 2)*M_hex + i + k;		// Point #3
@@ -222,8 +222,7 @@ bool runFdtdWithFieldDisplay(int argc, char** argv)	// This is the primary funct
 	glutMouseFunc(mouse);
 	glutMotionFunc(motion);							// picks a GPU, creates both vertex buffers
 	//create_Grid_points_only(dptr);
-//	createColormapOnGpu();							// colormap used to map field intensity
-		
+
 	if (int ret = copyHexTMzArraysToDevice() != 0){	// copy data from CPU RAM to GPU global memory
 		if (ret == 1) printf("Memory allocation error in copyTMzArraysToDevice(). \n\n Exiting.\n");
 		return 0;
@@ -275,7 +274,7 @@ void runIterationsAndDisplay()						// This is the glut display function.  It is
 	cudaThreadSynchronize();
 	glutSwapBuffers();				// Swap the front and back buffers
 	glutPostRedisplay();
-	Sleep(25);
+	Sleep(slowdown);
 		
 	//for (int k = 0; k < 8; k++){
 	//	//printf("qIndices[%i]:%i\n", k, qIndices[k]);
@@ -361,18 +360,4 @@ void drawText(float x, float y, void *font, char *string) {
 	for (c = string; *c != ' '; c++) {
 		glutBitmapCharacter(font, *c);
 	}
-}
-
-void timer(int flag) {
-	uint drawStartTime = clock();
-	glutPostRedisplay();
-	uint drawEndTime = clock();
-
-	uint delayToNextFrame = (CLOCKS_PER_SEC / MAX_FPS) - (drawEndTime - drawStartTime);
-	delayToNextFrame = floor(delayToNextFrame + 0.5);
-	delayToNextFrame < 0 ? delayToNextFrame = 0 : NULL;
-
-	printf("drawStartTime: %i\n", drawStartTime);
-	printf("delayToNextFrame: %i\n", delayToNextFrame);
-	glutTimerFunc(delayToNextFrame, timer, 1);
 }
