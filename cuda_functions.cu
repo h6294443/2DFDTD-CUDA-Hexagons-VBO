@@ -28,94 +28,6 @@ __global__ void Source_Update_Kernel(double *dEz, float *dImEz, int x, int y, in
 	}
 }
 
-//__global__ void Update_Ez_kernel(double *dEz, float *dEz_float, double *dH1, double *dH2, double *dH3, double *dCez, double hex_t, int M, int N)
-//{
-//	// Map from threadIdx/blockIdx to cell position
-//	int row = blockIdx.y * blockDim.y + threadIdx.y;		// row is also y or j
-//	int col = blockIdx.x * blockDim.x + threadIdx.x;		// col is also i or x
-//	int offset = row * blockDim.x * gridDim.x + col;		// (i, j)
-//	 
-//	int flag_odd = row % 2;
-//	int flag_even;
-//	if (flag_odd == 1) flag_even = 0; else flag_even = 1;
-//	int offset_mdH1 = (row - 1) * blockDim.x * gridDim.x + (col + flag_odd);
-//	int offset_pdH3 = (row - 1) * blockDim.x * gridDim.x + (col - flag_even);
-//
-//	int size = M * N;										// used in the in-bounds check
-//	double mdH1, mdH2, mdH3, pdH1, pdH2, pdH3;				// place holders for the dH terms
-//
-//	if (offset < size) {									// is threadIndex in bounds of Ez array?
-//		mdH1 = dH1[offset_mdH1];
-//		pdH3 = dH3[offset_pdH3];
-//		
-//		if (row == 0) {										// the following if else statements are
-//			mdH1 = 0.f;										// boundary checks to ensure no field cells 
-//			pdH3 = 0.f;										// with indexes out of bounds are accessed
-//		}
-//		if (col == N - 1 && flag_odd == 1)
-//			mdH1 = 0.f;
-//		if (col == 0 && flag_even == 1)
-//			pdH3 = 0.f;
-//		
-//		if (col == 0)
-//			pdH2 = 0.f;
-//		else
-//			pdH2 = dH2[offset - 1];
-//
-//		pdH1 = dH1[offset];
-//		mdH2 = dH2[offset];
-//		mdH3 = dH3[offset];
-//		
-//		dEz[offset] = dEz[offset] + dCez[offset] * (hex_t *(pdH1 + pdH2 + pdH3 - mdH1 - mdH2 - mdH3));
-//		dEz_float[offset] = __double2float_rd(dEz[offset]);
-//	}
-//	syncthreads();	
-//}
-
-//__global__ void Update_3H_kernel(double *dH1, double *dCh1, double *dH2, double *dCh2, double *dH3, double *dCh3, double *dEz, int M, int N)
-//{
-//	int row = blockIdx.y * blockDim.y + threadIdx.y;					// calculates y or j
-//	int col = blockIdx.x * blockDim.x + threadIdx.x;					// calculates x or i
-//	int offset = row * blockDim.x * gridDim.x + col;					// calculates the offset for position (i,j)
-//	
-//	int flag_odd = row % 2;
-//	int flag_even;
-//	if (flag_odd == 1) flag_even = 0; else flag_even = 1;
-//
-//	int offset_H1_Ez1 = (row + 1) * blockDim.x * gridDim.x + col - flag_even;	// offset for the positive Ez term in H1 update equation
-//	int offset_H2_Ez2 = offset + 1;												// offset for the positive Ez term in H2 update equation
-//	int offset_H3_Ez2 = (row + 1) * blockDim.x * gridDim.x + col + flag_odd;	// offset for the positive Ez term in H3 update equation
-//	
-//	int size = M * N;					// used for the in-bounds check
-//	double Ez1_H1, Ez2_H2, Ez2_H3;		// placeholders
-//
-//	if (offset < size) {				// in-bounds check
-//		
-//		if (row == N - 1){				// The following if else blocks implement boundary
-//			Ez1_H1 = 0.f;					// controls to prevent out-of-bounds access
-//			Ez2_H3 = 0.f;
-//		}
-//		else if (col == 0 && flag_even == 1)
-//			Ez1_H1 = 0.f;
-//		else {
-//			Ez1_H1 = dEz[offset_H1_Ez1];
-//			Ez2_H3 = dEz[offset_H3_Ez2];
-//		}
-//		if (col == M - 1){
-//			Ez2_H2 = 0.f;
-//			if (flag_odd == 1)
-//				Ez2_H3 = 0.f;
-//		}
-//		else
-//			Ez2_H2 = dEz[offset_H2_Ez2];
-//
-//		dH1[offset] = dH1[offset] + dCh1[offset] * (Ez1_H1 - dEz[offset]);
-//		dH2[offset] = dH2[offset] + dCh2[offset] * (dEz[offset] - Ez2_H2);
-//		dH3[offset] = dH3[offset] + dCh3[offset] * (dEz[offset] - Ez2_H3);
-//		
-//	}
-//	__syncthreads();
-//}
 __global__ void Update_Ez_kernel(double *dEz, float *dEz_float, double *dH1, double *dH2, double *dH3, double *dCez, double hex_t, int M, int N)
 {
 	int offset = blockIdx.x * blockDim.x + threadIdx.x;
@@ -212,17 +124,6 @@ void update_all_fields_hex_CUDA()
 	dim3 THD(TILE_SQUARED, 1, 1);
 	double factor = g->cdtds / g->N_lambda;
 	
-	// Debugging variables //
-	//float *ez_check;
-	/*double *ez_check_double;*/
-	//ez_check = new float[M*N];
-	//ez_check_double = new double[M*N];
-	//double *h1_check, *h2_check, *h3_check;
-	//h1_check = new double[M*N];
-	//h2_check = new double[M*N];
-	//h3_check = new double[M*N];
-	// End Debugging variables //
-
 	g->time += 1;										// Must advance time manually here
 	// Launch a kernel on the GPU with one thread for each element.
 	Update_3H_kernel << <BLK, THD >> >(dev_h1, dev_ch1, dev_h2, dev_ch2, dev_h3, dev_ch3, dev_ez, g->im, g->jm);	// may need to reduce the last two arguments to g->im-1 and g->jm-1
@@ -234,7 +135,7 @@ void update_all_fields_hex_CUDA()
 	checkErrorAfterKernelLaunch();						// Check for any errors launching the kernel
 	deviceSyncAfterKernelLaunch();						// Do a device sync 
 	
-	Source_Update_Kernel << <BLK, THD >> >(dev_ez, dev_ez_float, g->src_i, g->src_j, 0, g->time, factor, 128, g->N_lambda, g->cdtds, 0, g->maxTime, g->im);
+	Source_Update_Kernel << <BLK, THD >> >(dev_ez, dev_ez_float, g->src_i, g->src_j, g->src_type, g->time, factor, 128, g->N_lambda, g->cdtds, 0, g->maxTime, g->im);
 }
 
 void resetBeforeExit() {

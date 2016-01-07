@@ -6,18 +6,8 @@ unsigned int image_width = g->im;// +1;
 unsigned int image_height = g->jm;// 3 * N + 2;
 int drawMode = GL_TRIANGLE_FAN;
 int iGLUTWindowHandle = 0;          // handle to the GLUT window
-size_t number_of_bytes;
-
-GLuint pbo_destination;
-struct cudaGraphicsResource *cuda_pbo_destination_resource;
-GLuint cuda_result_texture;
-
-// The variables below were also extern in global.h, but were then defined in global.cpp
-// in Demir's code.
 float global_min_field = 1e9;
 float global_max_field = -1e9;
-unsigned int* image_data;
-float* field_data;
 
 // mouse controls
 int mouse_old_x, mouse_old_y;
@@ -234,7 +224,7 @@ bool runFdtdWithFieldDisplay(int argc, char** argv)	// This is the primary funct
 void runIterationsAndDisplay()						// This is the glut display function.  It is called once each
 {													// glutMainLoop() iteration.
 	if (pause_flag) {
-		if (g->time < maxTime)
+		if (g->time < g->maxTime)
 			update_all_fields_hex_CUDA();	// was fdtdIternationsOnGpu()
 		else {
 			copyHexFieldSnapshotsFromDevice();

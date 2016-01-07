@@ -27,6 +27,7 @@ struct Grid {
 	double DOMX, DOMY, dx, dt;		// Domain size in meters, dx and dt
 	double src_x, src_y;			// Source position in physical space (0,0 is lower left corner)
 	int src_i, src_j;				// Source position in Ez array index
+	int src_type;					// Source type
 	
 };
 

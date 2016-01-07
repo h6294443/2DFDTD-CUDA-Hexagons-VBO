@@ -3,9 +3,16 @@
 
 void gridInit(Grid *g) {
 	
-	// Step 1: Specify source frequency	
+	// Step 1: Specify source frequency	and type
 	printf("Enter source frequency in Hz (Engineering/Scientific notation ok): ");
 	scanf_s(" %lf", &g->src_f);
+	printf("\nEnter source type: \n");
+	printf("0 = sine\n");
+	printf("1 = cosine\n");
+	printf("2 = Ricker wavelet\n");
+	scanf_s(" %i", &g->src_type);
+	if (g->src_type < 0) g->src_type = 0;
+	if (g->src_type > 2) g->src_type = 2;
 	
 	// Step 2: Calculate wavelength
 	g->Lambda = c / g->src_f;           // Wavelength of the source (for a sine or cosine)
@@ -22,9 +29,11 @@ void gridInit(Grid *g) {
 	printf("\n\nEnter the domain height (Y) in meters: ");
 	scanf_s(" %lf", &g->DOMY);
 
-	// Step 5: Specify desired points-per-wavelength N_lambda
+	// Step 5: Specify desired points-per-wavelength N_lambda and simulation steps
 	printf("\n\nEnter points-per-wavelength (can be a float): ");
 	scanf_s(" %lf", &g->N_lambda);
+	printf("\n\nEnter simulation time steps: ");
+	scanf_s(" %i", &g->maxTime);
 
 	// Step 6: Calculate dx (this may not be dx as defined)
 	g->dx = g->Lambda / g->N_lambda;				// This is the largest distance possible within one hexagon - from one point to the opposing pointy point
@@ -39,7 +48,7 @@ void gridInit(Grid *g) {
 	// Step 8: Specify source position (and soon, type)
 	//const int src_pos_x = (int)(0.15*M);
 	//const int src_pos_y = (int)(0.5*N);
-	g->src_x = 0.65 * g->DOMX;
+	g->src_x = 0.75 * g->DOMX;
 	g->src_y = 0.50 * g->DOMY;
 
 	// Calculate a few more hexagon-specific stuff
@@ -61,7 +70,6 @@ void gridInit(Grid *g) {
 	
 	g->nCells = g->im * g->jm; // this is padded to get H(0,0) values to calculate.  
 	g->time = 0;
-	g->maxTime = maxTime;
 	g->type = twoDGeoTMz;
 	int m, n;
 
@@ -78,8 +86,8 @@ void gridInit(Grid *g) {
 
 	// The following implements a PEC in the center of the domain, a circle of radius R.
 	// Alternatively, specify the center of the circle.
-	double r1 = 0.25*g->DOMX/2;
-	double r2 = 0.75*g->DOMX/2;
+	double r1 = 0.35*g->DOMX/2;
+	double r2 = 0.85*g->DOMX/2;
 	double xc = g->DOMX / 2;
 	double yc = g->DOMY / 2;
 	double xcurrent = 0; double ycurrent = 0; double xd = 0; double yd = 0;
@@ -112,11 +120,7 @@ void gridInit(Grid *g) {
 			g->ch1[offset] = g->dt / (u0 * 2 * g->hex_d);
 			g->ch2[offset] = g->dt / (u0 * 2 * g->hex_d);
 			g->ch3[offset] = g->dt / (u0 * 2 * g->hex_d);
-			g->ez[offset] = 0;
-					
-					
+			g->ez[offset] = 0;					
 		}
-	}
-
-	
+	}	
 }

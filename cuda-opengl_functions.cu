@@ -87,11 +87,7 @@ __global__ void create_hex_image_on_gpu_kernel_1D(uchar4 *colorPos, int M_color,
 	int j = offset / M_color;							// Creates a virtual row index for the 1-D case, needed for odd/even row check
 	int i = offset % M_color;						// Keeping both offset and i for clarity
 	int max_size = M_color*N_color;					// Size of the vertex array (actual points)
-	
 	int flag_odd = j % 2;
-	int flag_even;
-	if (flag_odd == 1) flag_even = 0; else flag_even = 1;
-
 	float F;										// Color scalar
 
 	if (offset < max_size) {				        // Check row and column index are in range
@@ -143,7 +139,7 @@ void createImageOnGpu()	// argument g_odata is the float Ez field
 	if (minval < global_min_field) global_min_field = minval;
 	if (maxval > global_max_field) global_max_field = maxval;
 	    
-	minval = -1.0;	maxval = 1.0;	global_min_field = -0.2; global_max_field = 0.2;
+	minval = -1.0f;	maxval = 1.0f;	global_min_field = -0.2f; global_max_field = 0.2f;
 	//the following kernel now takes a uchar4 array, not uint
 	create_hex_image_on_gpu_kernel_1D << < BLK1, THD1 >> >(cptr, M_dptr, N_dptr, dvF, g->im, g->jm, global_min_field, global_max_field);
 }
@@ -158,24 +154,14 @@ void create_Grid_points_only(float4* dDptr, uchar4 *cPtr)
 	int screendim = g->im;
 	if (g->jm > g->im) screendim = g->jm;
 
-	float h4 = (2.0 / ((float)screendim - 0.75))/4;					// The height of the hexagon
-	float wi2 = (2.0 / ((float)screendim + 0.50))/2;				// The width of the hexagon
+	float h4 = (2.0f / ((float)screendim - 0.75f))/4.f;					// The height of the hexagon
+	float wi2 = (2.0f / ((float)screendim + 0.50f))/2.f;				// The width of the hexagon
 	
 	/* The following four lines are for the 1-D case */
 	int Bx1 = (TILE_SQUARED - 1 + M_dptr*N_dptr) / TILE_SQUARED;
 	dim3 BLK1(Bx1, 1, 1);									// Grid-block dimension for the 1-D case
 	dim3 THD1(TILE_SQUARED, 1, 1);							// Thread-block dimension for the 1-D case
 			
-	create_Grid_points_only_kernel_1D << < BLK1, THD1 >> >(dDptr, cPtr, M_dptr, N_dptr, h4, wi2);
-	
-	//int size1 = TILE_SQUARED * Bx1;							// Total array size for the 1-D case
-	/* The following four lines are for trouble-shooting purposes */
-	/*float4 *vertex_check;
-	vertex_check = new float4[size1];
-	cudaMemcpy(vertex_check, dDptr, size1 * sizeof(float4), cudaMemcpyDeviceToHost);	
-	for (int k = 0; k < size1; k++) {
-		if (vertex_check[k].x != 0 && vertex_check[k].y != 0) 
-			printf("vertex[%i] x = %f and y = %f\n", k, vertex_check[k].x, vertex_check[k].y);
-	}*/
+	create_Grid_points_only_kernel_1D << < BLK1, THD1 >> >(dDptr, cPtr, M_dptr, N_dptr, h4, wi2);	
 }																					
 
